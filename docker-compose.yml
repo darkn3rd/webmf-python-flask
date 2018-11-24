@@ -1,0 +1,9 @@
+version: '2'
+services:
+  flask:
+    restart: always
+    build: .
+    ports:
+     - "5000:5000"
+    volumes:
+     - .:/code
