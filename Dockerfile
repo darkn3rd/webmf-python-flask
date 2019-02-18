@@ -1,4 +1,4 @@
-FROM python:2-onbuild
+FROM python:3.7.2
 
 # Create app directory
 RUN mkdir -p /usr/src/app
