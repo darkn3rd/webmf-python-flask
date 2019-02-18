@@ -1,69 +1,65 @@
-# **Flask WebMF**
+# **Flask Web Microframework**
 
-## **Using on Mac OS X Host**
+## **Running the Application**
 
-* Prerequisites:
-  * Install XCode Command Line Tools
-  * Install Brew `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+These instructions and scripts have been tested on macOS (aka Mac OS X) and Linux with Python installed.
 
-### **Install**
+### **Manually with Python**
 
-```bash
-$ brew install python
-$ # Install/Setup virtualenv (optional)
-$ pip install virtualenv
-$ pip install virtualenvwrapper
-$ mkdir ${HOME}/.virtualenvs
-$ source /usr/local/bin/virtualenvwrapper.sh
-```
-
-## **Run**
+With [pyenv](https://github.com/pyenv/pyenv) to manage [python](https://www.python.org/) versions, and [virtualenv](https://virtualenv.pypa.io) to isolate your packages, you can optionally create a project area.
 
 ```bash
-$ pip install flask # install flask library
-$ ./app.py          # run program
+# Optional Setup w/ PyEnv + VirtualEnv
+VERSION=$(cat .python-version)
+pyenv install $VERSION
+pyenv virtualenv $VERSION 'flask-test'
+pyenv activate 'flask-test'
+# Install Required Packages
+pip install -r requirements.txt
+# Run Server
+./app.py &
+# Manually Test
+curl -i localhost:5000/
+curl -i localhost:5000/hello/Simon
 ```
 
-### **Run Using Virtualenv**
-
-This uses [virtualenv](https://virtualenv.pypa.io/en/latest/), so that libraries are installed in locally in only your account.
+### **Using Docker Compose**
 
 ```bash
-$ mkvirtualenv flaskenv            # create segregated environment
-$ pip install -r requirements.txt  # install flask library locally
-$ ./app.py                         # run program
-$ ## Run Tests Here (see below)
-$ deactivate                       # exit segregated environment
+# Start containerized service on Docker
+docker-compose up -d
+# Determine Guest is native Docker, Docker-Machine or Docker-Desktop
+[ -z ${DOCKER_MACHINE_NAME} ] || WEBSERVER=$(docker-machine ip ${DOCKER_MACHINE_NAME})
+WEBSERVER=${WEBSERVER:-localhost}
+# Manually Test
+curl -i $WEBSERVER:5000/
+curl -i $WEBSERVER:5000/hello/Simon
 ```
 
-## **Using Docker or Vagrant**
-
-See [Tools Readme](../TOOLS.md) for more information on install, setup, and start Docker or Vagrant.
-
-### **Build and Run with Docker Compose**
+### **Using Docker on Vagrant/Virtualbox**
 
 ```bash
-$ docker-compose up -d
+# Start containerized service on Vagrant/Virtualbox guest
+vagrant up
+# Manually Test
+curl -i localhost:5000/
+curl -i localhost:5000/hello/Simon
 ```
 
-### **Build and Run with Vagrant**
+## **Running Automated Tests**
 
 ```bash
-$ vagrant up
+./test.py
 ```
 
-## **Testing Results**
+## Resources
 
-```bash
-$ [ -z ${DOCKER_MACHINE_NAME} ] || WEBSERVER=$(docker-machine ip ${DOCKER_MACHINE_NAME})
-$ WEBSERVER=${WEBSERVER:-localhost}
-$ PORT=5000
-$ curl -i ${WEBSERVER}:${PORT}
-HTTP/1.0 200 OK
-Content-Type: text/html; charset=utf-8
-Content-Length: 13
-Server: Werkzeug/0.11.4 Python/2.7.11
-Date: Sun, 13 Mar 2016 07:02:41 GMT
-
-Hello World!
-```
+* Python Web Microframework
+    * [Flask](http://flask.pocoo.org/)
+* Testing
+    * [Testing Flask Applications](http://flask.pocoo.org/docs/1.0/testing/)
+    * [Python unittests in Jenkins?](https://stackoverflow.com/questions/11241781/python-unittests-in-jenkins)
+* Python Environment
+    * [python](https://www.python.org/) - language versions
+    * [pyenv](https://github.com/pyenv/pyenv) - manage python versions
+    * [virtualenv](https://virtualenv.pypa.io) to isolate packages with both Python 2 and Python 3.
