@@ -72,3 +72,4 @@ curl -i localhost:5000/hello/Simon
     * [python](https://www.python.org/) - language versions
     * [pyenv](https://github.com/pyenv/pyenv) - manage python versions
     * [virtualenv](https://virtualenv.pypa.io) to isolate packages with both Python 2 and Python 3.
+    * [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) - pyenv plugin for ease-of-use pyenv + virtualenv integration.  Can automatically switch virtualenv based on setting in `.python-version`.

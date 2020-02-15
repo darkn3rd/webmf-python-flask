@@ -1,1 +1,2 @@
-brew "python"
+brew "pyenv"
+brew "pyenv-virtualenv"

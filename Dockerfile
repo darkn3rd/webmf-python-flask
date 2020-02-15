@@ -1,4 +1,4 @@
-FROM python:3.7.2
+FROM python:3.7.6
 
 # Create app directory
 RUN mkdir -p /usr/src/app
