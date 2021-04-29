@@ -1,19 +1,28 @@
 # **Flask Web Microframework**
 
+## **Prerequisites**
+
+You need to have a functional Python 3 environment to run this project. I recommend [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv). 
+
+After you can download and install the python modules into a segregated virtualenv.
+
+```bash
+# install python and create virtualenv
+pyenv install 3.7.6
+pyenv virtualenv 3.7.6 webmf-python-flask
+# change to virtualenv
+cd .
+# update pip module
+pip install --upgrade pip
+```
+
 ## **Running the Application**
 
 These instructions and scripts have been tested on macOS (aka Mac OS X) and Linux with Python installed.
 
-### **Manually with Python**
-
-With [pyenv](https://github.com/pyenv/pyenv) to manage [python](https://www.python.org/) versions, and [virtualenv](https://virtualenv.pypa.io) to isolate your packages, you can optionally create a project area.
+### **Test using Python**
 
 ```bash
-# Optional Setup w/ PyEnv + VirtualEnv
-VERSION=$(cat .python-version)
-pyenv install $VERSION
-pyenv virtualenv $VERSION 'flask-test'
-pyenv activate 'flask-test'
 # Install Required Packages
 pip install -r requirements.txt
 # Run Server
@@ -63,3 +72,4 @@ curl -i localhost:5000/hello/Simon
     * [python](https://www.python.org/) - language versions
     * [pyenv](https://github.com/pyenv/pyenv) - manage python versions
     * [virtualenv](https://virtualenv.pypa.io) to isolate packages with both Python 2 and Python 3.
+    * [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) - pyenv plugin for ease-of-use pyenv + virtualenv integration.  Can automatically switch virtualenv based on setting in `.python-version`.
