@@ -2,14 +2,19 @@
 
 ## **Prerequisites**
 
-You need to have a functional Python 3 environment to run this project. I recommend [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv). 
+You need to have a functional Python 3 environment to run this project. I recommend [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv).
 
 After you can download and install the python modules into a segregated virtualenv.
 
 ```bash
 # install python and create virtualenv
-pyenv install 3.7.6
-pyenv virtualenv 3.7.6 webmf-python-flask
+## NOTE: pcre grep requires GNU grep, e.g. grep -oP
+LATEST_PYTHON3=$(
+ pyenv install --list | tr -d ' ' | grep -oP '^3\.*\d+\.\d+$' | sort -V | tail -1
+)
+
+pyenv install $LATEST_PYTHON3
+pyenv virtualenv $LATEST_PYTHON3 webmf-python-flask
 # change to virtualenv
 cd .
 # update pip module
